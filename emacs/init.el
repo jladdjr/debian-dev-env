@@ -1136,91 +1136,6 @@ Run whitespace-cleanup on save unless
     (if jl/debug (message "org"))))
 
 
-(use-package peut-publier
-  :after (:all org)
-  ;; :straight (:repo "git@github.com:excalamus/peut-publier.git")
-  :straight (:repo "https://github.com/excalamus/peut-publier.git")
-  :config
-
-  (if jl/debug (message "peut-publier")))
-
-;; 
-(use-package peut-gerer
-  :after (:all right-click-context org)
-  :straight (:repo "https://github.com/excalamus/peut-gerer.git" :branch "main")
-  :config
-
-  ;; For privacy's sake, define `peut-gerer-project-alist' in secret-lisp.el:
-  ;;
-  ;;     (setq peut-gerer-project-alist
-  ;;           '(("project-x"
-  ;;              :root "/data/data/com.termux/files/home/projects/project-x/"
-  ;;              :main "main.py"
-  ;;              :venv  "/data/data/com.termux/files/home/projects/project-x/venv/"
-  ;;              :activate "/data/data/com.termux/files/home/projects/project-x/venv/bin/activate"
-  ;;              :commands ("pyinstaller build.spec")
-  ;;              )
-  ;;             ("project-a"
-  ;;              :root "C:\\projects\\project-umbrella\\apps\\project_a\\"
-  ;;              :main "project_a.py"
-  ;;              :venv "C:\\Users\\excalamus\\Anaconda3\\envs\\project_a\\"
-  ;;              :activate "C:\\Users\\excalamus\\Anaconda3\\condabin\\conda.bat activate"
-  ;;              )))
-
-  (if (eq jl/device 'gnu/linux)
-      (setq peut-gerer-command-prefix "python3"))
-
-  (setq peut-gerer-after-activate-functions '(pyvenv-activate))
-
-  (setq peut-gerer-after-select-functions
-        '((lambda (x) (funcall 'pyvenv-deactivate))
-          pyvenv-activate))
-
-  ;; ;; disable sending to shell while in shell because it would only be
-  ;; ;; useful for concatenating duplicates of a region; if you have
-  ;; ;; region selected and you send that region to the current buffer,
-  ;; ;; the region appears immediately after the region.
-  ;; (add-to-list 'right-click-context-global-menu-tree
-  ;;              '("Send to region to shell"
-  ;;                :call (peut-gerer-send-region)
-  ;;                :if
-  ;;                (and (use-region-p)
-  ;;                     ;; only disables to peut-gerer registered shells
-  ;;                     (not
-  ;;                      (member (string-trim (buffer-name) "*" "*")
-  ;;                              peut-gerer--active-projects-alist)))))
-
-  ;; quick hack; create an jl/on-demand-window (C-<f1>), then you can
-  ;; select a region anywhere and send that region to the odw.  For
-  ;; use in exploratory debugging.  Try stuff in the repl, then send
-  ;; that to the script.
-  (add-to-list 'right-click-context-global-menu-tree
-               '("Send region to on-demand-window"
-                 :call (jl/send-line-or-region nil nil t)))
-
-  (add-to-list 'right-click-context-global-menu-tree
-               '("Send to shell"
-                 :call (jl/send-line-or-region nil nil nil peut-gerer-shell)))
-
-  (add-to-list 'right-click-context-global-menu-tree
-               '("Search..."
-                 ("pyside" :call (jl/search-Qt))
-                 ("sdl-wiki" :call (jl/search-sdl-wiki))
-                 ;; ("QGIS" :call (jl/search-qgis))
-                 ("Open Jira ticket" :call (jl/search-jira))
-                 ("ddg" :call (jl/search-ddg))))
-
-  (if (eq jl/device 'gnu/linux)
-      (add-to-list 'right-click-context-global-menu-tree
-                   '("Search for in SDL" :call (jl/search-sdl)))
-    (add-to-list 'right-click-context-global-menu-tree
-                 '("Search for in PySide" :call (jl/search-Qt))))
-
-  ;; (pop right-click-context-global-menu-tree)
-
-  (if jl/debug (message "peut-gerer")))
-
-
 (use-package qml-mode
   :after (:all org)
   :straight (:fork "excalamus/qml-mode")
