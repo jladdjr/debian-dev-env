@@ -1100,7 +1100,6 @@ Run whitespace-cleanup on save unless
      (makefile . t)
      (python . t)
      (emacs-lisp . t)
-     (ledger . t)
      (latex . t)
      (shell . t)
      (scheme . t)
