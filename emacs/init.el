@@ -577,7 +577,7 @@ Run whitespace-cleanup on save unless
 
 (use-package eyebrowse
   :after (:all org)
-  :straight (:fork "jladdjr/eyebrowse")
+  :straight (:repo "https://github.com/jladdjr/eyebrowse.git")
   :config
 
   (if jl/debug (message "eyebrowse")))
