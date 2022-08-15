@@ -972,36 +972,6 @@ Run whitespace-cleanup on save unless
   (if jl/debug (message "language-detection.el")))
 
 
-(use-package ledger-mode
-  :after (:all org)
-  :straight (:fork "excalamus/ledger-mode")
-  :defer t
-  :config
-  (setq ledger-post-amount-alignment-column 60)
-  (setq ledger-report-auto-refresh-sticky-cursor t)
-  (setq ledger-highlight-xact-under-point nil)
-  (setq ledger-report-resize-window nil)
-
-  (defvar jl/ledger-highlight-regexp "dummy"
-    "Regexp for matching lines in Ledger Report buffer.")
-
-  (defun jl/set-ledger-highlight-regexp (reg)
-    "Set `jl/ledger-highlight-regexp' to REG."
-    (interactive
-     (list (read-string "Regexp: ")))
-    (let ((quoted (regexp-quote reg)))
-      (setq jl/ledger-highlight-regexp quoted)
-      (message "Set `jl/ledger-highlight-regexp' to %s"
-               jl/ledger-highlight-regexp)))
-
-  (add-hook 'ledger-report-after-report-hook
-            (lambda () (highlight-lines-matching-regexp
-                        jl/ledger-highlight-regexp
-                        'hi-yellow)))
-
-  (if jl/debug (message "ledger-mode")))
-
-
 (use-package lsp-jedi
 ;; requires pip install jedi-language-server
 ;; https://github.com/pappasam/jedi-language-server
