@@ -2281,4 +2281,4 @@ chicken and egg problem."
 ;; Build org-agenda from files in ~/org and ~/org/projects
 ;; - The org agenda builder does not seem to search their
 ;;   directories listed here recursively
-(setq org-agenda-files '("/home/foo_user/org" "/home/foo_user/org/projects"))
+(setq org-agenda-files '("/Users/jamesladd/org" "/Users/jamesladd/org/projects"))
