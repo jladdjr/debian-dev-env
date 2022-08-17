@@ -3,6 +3,8 @@
 ;;; Initially derived from:
 ;;; - https://github.com/excalamus/.emacs.d/blob/main/init.el
 
+;; TODO install swiper via init.el
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; debug
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
