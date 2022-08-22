@@ -4,7 +4,6 @@ export PATH="/opt/homebrew/bin:$PATH"
 
 
 # https://oliverspryn.com/blog/adding-git-completion-to-zsh
-zstyle ':completion:*:*:pass:*' script /opt/homebrew/share/zsh/site-functions/_pass
 fpath=(/opt/homebrew/share/zsh/site-functions $fpath)
 
 autoload -Uz compinit && compinit
