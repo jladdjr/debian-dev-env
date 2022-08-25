@@ -1077,23 +1077,19 @@ Run whitespace-cleanup on save unless
         '((sequence
            ;; open items
            "TODO"                 ; todo, not active
-           "CURRENT"              ; todo, active item
-           "PENDING"              ; requires more information (timely)
+           "DOING"                ; todo, active item
            "|"  ; entries after pipe are considered completed in [%] and [/]
            ;; closed items
            "DONE"        ; completed successfully
-           "ON-HOLD"     ; requires more information (indefinite time)
-           "CANCELED"    ; no longer relevant, not completed
+           "BLOCKED"     ; requires more information (indefinite time)
            )))
 
   (setq org-todo-keyword-faces
         '(
           ("TODO" . "light pink")
-          ("CURRENT" . "yellow")
+          ("DOING" . "yellow")
           ("DONE" . "light green")
-          ("PENDING" . "light blue")
-          ("ON-HOLD" . "plum")
-          ("CANCELED" . "gray")
+          ("BLOCKED" . "red")
           ))
 
   (org-babel-do-load-languages
@@ -2284,3 +2280,8 @@ chicken and egg problem."
 ;; - The org agenda builder does not seem to search their
 ;;   directories listed here recursively
 (setq org-agenda-files '("/Users/jamesladd/org" "/Users/jamesladd/org/projects"))
+
+(require 'package)
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
+
+; TODO: use straight for org-kanban install?
