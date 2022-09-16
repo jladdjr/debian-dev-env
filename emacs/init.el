@@ -2276,6 +2276,19 @@ chicken and egg problem."
 (global-set-key "\C-s" 'swiper)
 (global-set-key "\M-s" 'swiper-all)
 
+; custom key bindings
+(global-set-key (kbd "C-c t") 'shell)
+(global-set-key (kbd "C-c l") 'avy-goto-char-timer)
+(global-set-key (kbd "C-c C-c") 'ace-swap-window)
+
+;; helm replacements
+;; replace selected commands with corresponding helm commands
+(define-key (current-global-map) [remap list-buffers] 'helm-buffers-list)
+(define-key (current-global-map) [remap bookmark-jump] 'helm-filtered-bookmarks)
+
+; don't ask if I really want to kill this buffer
+(define-key (current-global-map) [remap kill-buffer] 'kill-this-buffer)
+
 ;; Build org-agenda from files in ~/org and ~/org/projects
 ;; - The org agenda builder does not seem to search their
 ;;   directories listed here recursively
