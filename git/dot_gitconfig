@@ -1,0 +1,29 @@
+[user]
+        name = Jim Ladd
+        email = jim@example.com
+[push]
+        default = current
+[alias]
+        co = checkout
+        st = status
+        br = branch
+        r = remote -v
+        sbr = branch --sort=-committerdate -a
+        last = log -1 HEAD
+        llog = log --pretty='%<(11)%h %<(18)%an %s'
+        head = log -1 --format=format:%H
+[color]
+        diff = auto
+        status = auto
+        branch = auto
+        interactive = auto
+        ui = true
+        pager = true
+[rebase]
+        instructionFormat = (%an <%ae>) %s
+[pull]
+       ff = only
+[init]
+       defaultBranch = devel
+[core]
+	excludesfile = /path/to/home/.gitignore_global
