@@ -2258,6 +2258,7 @@ chicken and egg problem."
 
 (define-key comint-mode-map (kbd "<up>") 'comint-previous-input)
 (define-key comint-mode-map (kbd "<down>") 'comint-next-input)
+(define-key comint-mode-map (kbd "C-c C-c") 'eyebrowse-close-window-config)
 
 ;; enable eyebrowse mode on startup
 (eyebrowse-mode t)
@@ -2279,7 +2280,7 @@ chicken and egg problem."
 ; custom key bindings
 (global-set-key (kbd "C-c t") 'shell)
 (global-set-key (kbd "C-c l") 'avy-goto-char-timer)
-(global-set-key (kbd "C-c C-c") 'ace-swap-window)
+(global-set-key (kbd "C-c C-c") 'eyebrowse-close-window-config)
 
 ;; helm replacements
 ;; replace selected commands with corresponding helm commands
@@ -2307,7 +2308,12 @@ chicken and egg problem."
 ; .. for eyebrowse
 ; make eyebrowse functions easier to call and globally available
 (global-set-key "\C-c'" 'eyebrowse-last-window-config)
-(global-set-key "\C-cc" 'eyebrowse-create-window-config)
+(defun jl/eyebrowse-create-window-config ()
+  "When creating new window config, only show current window"
+  (interactive)
+  (eyebrowse-create-window-config)
+  (delete-other-windows))
+(global-set-key "\C-cc" 'jl/eyebrowse-create-window-config)
 (global-set-key "\C-c<" 'eyebrowse-prev-window-config)
 (global-set-key "\C-c>" 'eyebrowse-next-window-config)
 (global-set-key "\C-c0" 'eyebrowse-switch-to-window-config-0)
@@ -2320,3 +2326,29 @@ chicken and egg problem."
 (global-set-key "\C-c7" 'eyebrowse-switch-to-window-config-7)
 (global-set-key "\C-c8" 'eyebrowse-switch-to-window-config-8)
 (global-set-key "\C-c9" 'eyebrowse-switch-to-window-config-9)
+
+;; custom window switching
+(defun jl/split-window-below ()
+  "Split window below, move point to other window"
+  (interactive)
+  (split-window-below)
+  (other-window 1))
+(defun jl/split-window-right ()
+  "Split window right, move point to other window"
+  (interactive)
+  (split-window-right)
+  (other-window 1))
+(define-key (current-global-map) [remap split-window-below] 'jl/split-window-below)
+(define-key (current-global-map) [remap split-window-right] 'jl/split-window-right)
+
+; don't ask if I really want to kill this buffer
+(define-key (current-global-map) [remap kill-buffer] 'kill-buffer-and-window)
+
+; customize magit
+(defun jl/magit-status ()
+  "Open magit-status window, by itself, in new eyebrowse window config"
+  (interactive)
+  (eyebrowse-create-window-config)
+  (magit-status)
+  (delete-other-windows))
+(define-key (current-global-map) [remap magit-status] 'jl/magit-status)
