@@ -2353,3 +2353,9 @@ chicken and egg problem."
   (delete-other-windows))
 (define-key (current-global-map) [remap magit-status] 'jl/magit-status)
 (define-key magit-mode-map (kbd "C-c C-c") 'eyebrowse-close-window-config)
+
+;; Make magit performance more tolerable on mac
+;; https://magit.vc/manual/magit/Performance.html <-- very helpful
+(setq magit-refresh-status-buffer nil)
+;; Enable to benchmark magit buffer refreshes
+;; (magit-toggle-verbose-refresh)
